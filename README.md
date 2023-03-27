@@ -1,6 +1,6 @@
 # Poker Simulator
 
-This is an in development repository with the overall goal of inputting opponents' hands or range of hands, as well as my own hand, and outputting a probability of winning.
+This repository is in development with the overall goal of inputting opponents' hands or range of hands, as well as my own hand, and outputting a probability of winning.
 
 ## Definitions
 ### Hand Rankings
@@ -19,3 +19,7 @@ This is an in development repository with the overall goal of inputting opponent
 Hand_detector: Detect the value of a hand
 - Input: List of 7 cards in a person's hand after the river (two pocket cards and five community cards)
 - Output: Tuple where the first value is the rank of the hand (1-9) and second is the five cards in the player's hand
+
+## One_hand_test.py
+
+Creates all test examples for hand_detector in one_hand.py to ensure correctness.
