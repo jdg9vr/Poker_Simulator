@@ -15,7 +15,6 @@ This is an in development repository with the overall goal of inputting opponent
 9. High Card
 
 ## One_hand.py
-Purpose: Create hand detector
 
 Hand_detector: Detect the value of a hand
 - Input: List of 7 cards in a person's hand after the river (two pocket cards and five community cards)
