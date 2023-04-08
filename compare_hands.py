@@ -3,9 +3,18 @@ from itertools import compress
 import numpy as np
 
 def compare_hands(list_of_hands, community_cards):
+    '''
+    PURPOSE: Give the winner of a group of hands (no limit on number of players)
+    INPUT: List_of_hands: List - Lists of pocket cards of all players
+           Community_cards: List - The five community cards
+    OUTPUT: List - Index of the winning hand(s) from the list_of_hands (usually only 1)
+    '''
+    # Create a list of 7 cards for each player from the inputted pockets and community cards
     full_hands = []
     for hand in list_of_hands:
         full_hands.append(hand+community_cards)
+        
+    # Find the value of the hand with hand_detector and create a list of the rank and a list for the cards in order
     hand_rank = []
     cards_in_order = []
     for hand in full_hands:
@@ -13,17 +22,27 @@ def compare_hands(list_of_hands, community_cards):
         hand_rank.append(hand_outcome[0])
         cards_in_order.append(hand_outcome[1])
     
+    # Find the best rank and the boolean of the best rank
     best_hand = max(hand_rank)
     which_best = [i == best_hand for i in hand_rank]
-    if len(np.where(which_best)[0]) == 1:
+    
+    if sum(which_best) == 1: # if the amount of hands with the max best rank is one (only one winner no ties)
         print(f"Hand {hand_rank.index(best_hand)} wins!")
-        return hand_rank.index(best_hand)
-    else:
+        return hand_rank.index(best_hand) # return the index of that best hand
+    else: # tie
+        # Create a tie hands list
         tie_hands = list(compress(cards_in_order, which_best))
         print(tie_hands)
-        handle_tie(best_hand, tie_hands, which_best)
+        handle_tie(best_hand, tie_hands, which_best) # send to handle tie function
     
 def handle_tie(rank, hands, tie_index_bools):
+    '''
+    PURPOSE: Return the best hand from all the tied hands
+    INPUT: Rank: Int - The rank of the tied hands (integer represented a specific hand i.e. 4 = Flush)
+           Hands: List - Tied hands in order
+           Tie_index_bools: List - Booleans representing which of the original hands are tied
+    OUTPUT: List - Index of the winning hand(s) from the list_of_hands (1 unless tie)
+    '''
     tie_index = list(np.where(tie_index_bools)[0])
     
     if type(hands[0]) == str:
