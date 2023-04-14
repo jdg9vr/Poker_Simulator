@@ -37,25 +37,27 @@ def compare_hands(list_of_hands, community_cards):
     
 def handle_tie(rank, hands, tie_index_bools):
     '''
-    PURPOSE: Return the best hand from all the tied hands
+    PURPOSE: Return the best hand(s) from all the tied hands
     INPUT: Rank: Int - The rank of the tied hands (integer represented a specific hand i.e. 4 = Flush)
-           Hands: List - Tied hands in order
+           Hands: List - Tied hands in order where each element is a hand (string form or int form for straights)
            Tie_index_bools: List - Booleans representing which of the original hands are tied
     OUTPUT: List - Index of the winning hand(s) from the list_of_hands (1 unless tie)
     '''
+    # Get indexes from the original list of the ties
     tie_index = list(np.where(tie_index_bools)[0])
     
+    # If the hands are strings, extract the actual numbers (want this even for flushes)
     if type(hands[0]) == str:
         real_hands = []
         for hand in hands:
             real_hand = []
             for card in hand:
-                real_hand.append(int(card[:2]))
+                real_hand.append(int(card[:2])) # append the first two characters as an int to get the number
             real_hands.append(real_hand)
     else:
         real_hands = hands
         
-    
+    # STRAIGHT FLUSH
     if rank == 1:
         first_cards = list(list(zip(*real_hands))[0])
         max_straight_card = max(first_cards)
