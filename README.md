@@ -2,6 +2,8 @@
 
 This repository is in development with the overall goal of inputting opponents' hands or range of hands, as well as my own hand, and outputting a probability of winning.
 
+This repository is ***currently in progress***
+
 ## Definitions
 ### Hand Rankings
 1. Straight Flush
